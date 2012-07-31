@@ -8,7 +8,6 @@
 $(function() {
 
 	var paths = {},
-		dfds = [],
 		results = {};
 	
 	function createDeferred(opts){
@@ -38,31 +37,19 @@ $(function() {
 		var dfd = createDeferred({
 			path : path
 		});
-		
-		// MAJOR hack... fix this shit.
-		dfd.path = path;
-		
-		paths[path] = dfd;
-		
-		dfds.push(dfd);
-	});
-		
-	// Try to resolve deferred, and...
-	$.when.apply($, dfds).then(function(){
-		var args = Array.prototype.slice.apply(arguments);
-		
-		for (var i = 0, len = args.length; i < len; i++){
-			// Get 1st element, store the path, and hide it
-			var section = $(args[i]).first();
-			section.attr('data-path', args[i].path);
+				
+		// Try to resolve deferred, and...
+		$.when(dfd).then(function(result){
+			var section = $(result).first();
+			section.attr('data-path', path);
 			section.css('display', 'none');
 			
 			// Insert html into DOM
 			$('body').prepend(section);
 			
 			// Save path and corresponding HTML
-			results[args[i].path] = section.get(0);	
-		}
+			results[path] = section.get(0);	
+		});
 	});
 	
 	$('a').on('click', function(e){		

@@ -8,6 +8,7 @@
 
 ```html
 <a href="login.html" data-prefetch>Login</a>
+```
 
 2) Subscribe to "fetched" event, and do what you wish after the user clicks a link.  You can slide the page in, replace the <body> with it, or do whatever you want!
 
@@ -15,6 +16,7 @@
 $.subscribe('fetched', function(event, response){
    $(document.body).replaceWith(response);
 });
+```
 
 ## Benefits
 

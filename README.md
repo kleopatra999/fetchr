@@ -14,7 +14,8 @@
 
 ```js
 $.subscribe('fetched', function(event, response){
-   $(document.body).replaceWith(response);
+   // Do whatever you want!
+   // response is a raw HTML string of the page you fetched
 });
 ```
 

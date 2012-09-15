@@ -31,7 +31,11 @@ $(function() {
 		if (!path) return;
 		
 		// If duplicate, exit.
-		if (paths[path]) return;
+		if (paths[path]){
+			return;
+		} else {
+			paths[path] = path;
+		}
 		
 		// Create deferred.
 		var dfd = createDeferred({
@@ -62,9 +66,6 @@ $(function() {
 			
 			// Cancel default link action.
 			return false;
-		} else {
-			// If path not found, follow the link as usual.
-			return true;
 		}
 	});
 	
